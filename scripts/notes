@@ -1,0 +1,25 @@
+// Donar acces a carpetes
+sudo chmod a+rwx /TFM
+sudo chmod -R 777 /TFM
+
+// llistat de carpetes (cap avall) i permisos
+ls -lR
+
+// Activar environment
+source .venv/bin/activate
+
+// Introduir shapefile en bbdd
+python3 main.py -SHP
+
+// Apagar/Iniciar apache
+sudo /etc/init.d/apache2 stop
+sudo ./xampp-linux-x64-8.2.4-0-installer.run
+sudo /opt/lampp/lampp start
+sudo /opt/lampp/lampp status
+
+// Arbre de pip i dependencies
+pip install pipdeptree
+pipdeptree
+
+// Arbre de directori
+tree

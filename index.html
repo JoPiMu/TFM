@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Visor de comercios por secciones censales</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="plugins/leaflet.fullscreen-master/Control.FullScreen.css" />
+    <link rel="stylesheet" href="plugins/Leaflet-MiniMap-master/src/Control.MiniMap.css">
+    <link rel="stylesheet" href="plugins/Leaflet.MousePosition-master/src/L.Control.MousePosition.css">
+</head>
+
+<body>
+    <div class="viewport">
+        <div class="encabezado" style="display: flex; justify-content: space-between;">
+            <div id="cap" style="font-size: 72px; align-self: center; width: fit-content; ">Visor</div>
+            <div style="text-align: center; align-self: center;">
+                <img src="https://www.udg.edu/ca/Portals/74/Images/logo-Unigis.png" alt="logo-Unigis" style="height: 100px;">
+            </div>
+            <div style="font-size: 20px; text-align: right; align-self: center;">
+                Autor: Joan Piñot Murillo <br>
+                Trabajo Final de Máster
+            </div>
+        </div>
+        <hr style="border: none; height: 2px; background-color: #004d00; margin: 0;">
+        <div class="contenido" style="flex-grow: 1;">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/L.TileLayer.BetterWMS.js"></script>
+    <script src="plugins/leaflet.fullscreen-master/Control.FullScreen.js"></script>
+    <script src="plugins/Leaflet-MiniMap-master/src/Control.MiniMap.js"></script>
+    <script src="plugins/Leaflet.MousePosition-master/src/L.Control.MousePosition.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <script>
+        // Cambiar titulo del mapa a selección de municipio
+            const url = 'http://localhost:8082/geoserver/TFM/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=TFM:comercios_poblacion_view&maxFeatures=1&outputFormat=application/json';
+            $.ajax({
+                url: url,
+                success: function(data) {
+                        const cityName = data.features[0].properties.municipio;
+                        document.getElementById('cap').innerText = `Visor de ${cityName}`;
+                },
+            });
+    </script>
+</body>
+</html>
